@@ -46,7 +46,8 @@ module ActiveType
             child.errors.each do |attribute, message|
               attribute = @index_errors ? "#{@target_name}[#{index}].#{attribute}" : "#{@target_name}.#{attribute}"
               parent.errors[attribute] << message
-              parent.errors[attribute].uniq!
+              # This causes a FrozenError in Rails 6.1
+              # parent.errors[attribute].uniq!
             end
           end
         end
